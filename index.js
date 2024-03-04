@@ -15,6 +15,10 @@ app.get('/pair', (req, res) => {
     res.sendFile(path.join(__path, '/public/pair.html'));
 });
 
+app.get('/qr', (req, res) => {
+    res.sendFile(path.join(__path, '/public/qr.html'));
+});
+
 app.get('/update-session', (req, res) => {
     res.sendFile(path.join(__path, '/public/updateSession.html'));
 });
@@ -22,8 +26,8 @@ app.get('/update-session', (req, res) => {
 let updateSession = require('./updateSession');
 app.use('/sid', updateSession);
 
-let qr = require('./qr');
-app.use('/qr', qr);
+let qrCode = require('./qr');
+app.use('/qr-code', qrCode);
 
 let pair = require('./pair');
 app.use('/code', pair);
