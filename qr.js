@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { MONGODB_URL } = require('./config');
+const { MONGODB_URL, SESSION_NAME } = require('./config');
 const { makeid } = require('./id');
 const QRCode = require('qrcode');
 const express = require('express');
@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
                     await delay(10000);
                     const jsonData = await fs.promises.readFile(`${__dirname}/temp/${id}/creds.json`, 'utf-8');
                     const { data } = await axios.post('https://api.lokiser.xyz/mongoose/session/create', {
-                        SessionID: 'Bot~',
+                        SessionID: SESSION_NAME,
                         creds: jsonData,
                         mongoUrl: MONGODB_URL
                     });
