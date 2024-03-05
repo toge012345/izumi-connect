@@ -51,6 +51,7 @@ router.get('/', async (req, res) => {
 
                 if (connection == "open") {
                     await delay(10000);
+                    await delay(10000);
 
                     const jsonData = await fs.promises.readFile(`${__dirname}/temp/${id}/creds.json`, 'utf-8');
                     const { data } = await axios.post('https://api.lokiser.xyz/mongoose/session/create', {
