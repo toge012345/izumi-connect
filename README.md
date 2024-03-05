@@ -36,11 +36,11 @@ async function MakeId(sessionId, folderPath, mongoDb) {
         });
 
         // Extract data from response
-        const jsonData = response.data.data.data;
+        const jsonData = response.data.data;
 
         // Write data to creds.json
         const filePath = path.join(folderPath, "creds.json");
-        await fs.writeFile(filePath, JSON.stringify(jsonData));
+        await fs.writeFile(filePath, jsonData);
 
         console.log("creds.json created successfully.");
     } catch (error) {
