@@ -11,7 +11,7 @@ Host this code in any server `eg : render`
 
 Connect your device with `pair or qr`
 
-## 4th connect
+## 4th connect to bot
 
 ### You can use this function for connecting with your bot MakeId Function
 
