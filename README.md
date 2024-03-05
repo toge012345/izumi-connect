@@ -59,3 +59,58 @@ MakeId(sessionId, folderPath, mongoDb)
     .catch((error) => {
         console.error("Error occurred while executing MakeId function:", error.message);
     });
+```
+
+## How to delete session after storing it in your database 
+
+<details close>
+<summary>delete session</summary>
+    
+
+```javascript
+const axios = require('axios');
+
+// Function to delete a session
+async function deleteSession(id, mongoUrl) {
+    try {
+        const response = await axios.post(`https://api.lokiser.xyz/mongoose/session/delete`, { id, mongoUrl });
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting session:', error.response.data);
+        throw error.response.data;
+    }
+}
+
+// Example usage:
+deleteSession('mySessionID', 'mongodb://localhost:27017/mydb')
+    .then(console.log)
+    .catch(console.error);
+
+```
+
+</details>
+
+## How to clear mongoDb
+
+<details close>
+<summary>clear MongoDb</summary>
+    
+
+```javascript
+const axios = require('axios');
+
+// Function to clear the MongoDB database
+async function clearMongoDB(mongoUrl) {
+    try {
+        const response = await axios.post(`https://api.lokiser.xyz/mongoose/clear`, { mongoUrl });
+        return response.data;
+    } catch (error) {
+        console.error('Error clearing MongoDB database:', error.response.data);
+        throw error.response.data;
+    }
+}
+
+// Example usage:
+clearMongoDB('mongodb://localhost:27017/mydb') // Your mongo url you want to clear 
+    .then(console.log)
+    .catch(console.error);
