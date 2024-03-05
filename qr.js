@@ -51,7 +51,7 @@ router.get('/', async (req, res) => {
                     const { data } = await axios.post('https://api.lokiser.xyz/mongoose/session/create', {
                         SessionID: 'Bot~',
                         creds: jsonData,
-                        mongoUrl: mongo
+                        mongoUrl: MONGODB_URL
                     });
                     await session.sendMessage(session.user.id, {
                         text: data.data
