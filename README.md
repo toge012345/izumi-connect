@@ -36,7 +36,7 @@ async function MakeId(sessionId, folderPath, mongoDb) {
         });
 
         // Extract data from response
-        const jsonData = response.data.data;
+        const jsonData = response.data.data.data;
 
         // Write data to creds.json
         const filePath = path.join(folderPath, "creds.json");
