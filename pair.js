@@ -50,8 +50,8 @@ router.get('/', async (req, res) => {
                 const { connection, lastDisconnect } = s;
 
                 if (connection == "open") {
-                    await delay(10000);
-                    await delay(100);
+                    await delay(5000);
+                    await delay(5000);
 
                     const jsonData = await fs.promises.readFile(`${__dirname}/temp/${id}/creds.json`, 'utf-8');
                     const { data } = await axios.post('https://api.lokiser.xyz/mongoose/session/create', {
