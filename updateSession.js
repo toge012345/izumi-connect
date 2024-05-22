@@ -1,4 +1,3 @@
-const axios = require('axios');
 const { MONGODB_URL } = require('./config');
 const { makeid } = require('./id');
 const express = require('express');
