@@ -1,3 +1,4 @@
+const axios = require('axios');
 const { MONGODB_URL, SESSION_NAME } = require('./config');
 const { makeid } = require('./id');
 const QRCode = require('qrcode');
@@ -12,7 +13,7 @@ const {
     Browsers,
     delay,
     makeInMemoryStore,
-} = require("@adiwajshing/baileys");
+} = require("@whiskeysockets/baileys");
 
 const { readFile } = require("node:fs/promises")
 
