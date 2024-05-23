@@ -1,3 +1,4 @@
+const axios = require('axios');
 const { MONGODB_URL } = require('./config');
 const { makeid } = require('./id');
 const express = require('express');
@@ -10,7 +11,7 @@ const {
     delay,
     Browsers,
     makeCacheableSignalKeyStore
-} = require("@adiwajshing/baileys");
+} = require("@whiskeysockets/baileys");
 
 function removeFile(FilePath) {
     if (!fs.existsSync(FilePath)) return false;
