@@ -8,6 +8,7 @@ const pino = require("pino");
 const {
     default: makeWASocket,
     useMultiFileAuthState,
+    fetchLatestBaileysVersion,
     delay,
     Browsers,
     makeCacheableSignalKeyStore
