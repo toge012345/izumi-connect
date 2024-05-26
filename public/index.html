@@ -1,351 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEZUKO | Session</title>
-    <meta property="og:image" content="https://i.imgur.com/02y6tEy.jpeg">
-    <meta property="og:title" content="Queen NEZUKO">
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 75vh;
-    flex-direction: column;
-    background: #000;
-  }
+    <title>QUEEN NEZUKO</title>
+    <link rel="icon" href="https://i.imgur.com/imOAWEN.jpeg" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap');
+        @font-face {
+            font-family: 'thunder';
+            src: url('./assets/thunder.woff') format('woff2'),
+                 url('./assets/thunder.woff2') format('woff');
+            /* You may need to adjust the paths to the "Inter" font files */
+        }
 
-  #main {
-      text-align: center;
-  }
+        body {
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
+            font-family: 'Bebas Neue', Arial, sans-serif; /* Use the custom "Thunder" font here */
+            background: #000000;
+            overflow: hidden;
+            color: #ffffff; /* Text color */
+        }
 
-  h1 {
-      font-size: 200%;
-      color: #ffffff;
-  }
+        .large-title {
+            font-size: 120px; /* Larger font size */
+            margin: 2rem;
+            opacity: 0; /* Start with zero opacity for the fade-in animation */
+            animation: fadeIn 2s ease forwards; /* Apply fade-in animation */
+        }
+        .shadow__btn {
+        padding: 10px 20px;
+        border: none;
+        margin: .2rem;
+        font-size: 17px;
+        color: #000000;
+        border-radius: 7px;
+        font-family: 'thunder', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.5s;
+        transition-property: box-shadow;
+      }
 
-  h3 {
-      font-weight: 200;
-      color: #ffffff;
-  }
+      .shadow__btn {
+        background: rgb(255, 255, 255);
+        box-shadow: 0 0 25px rgb(255, 255, 255);
+      }
 
-  h1, h3 {
-      letter-spacing: 0.05em;
-  }
-
-  .h {
-    font-family: "Montserrat Medium";
-    max-width: 40ch;
-    color: #ffffff;
-    position: relative;
-    text-align: top;
-    transform: scale(0.94);
-    animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
-  }
-  @keyframes scale {
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  span {
-    display: inline-block;
-    opacity: 0;
-    filter: blur(4px);
-  }
-
-  span:nth-child(1) {
-    animation: fade-in 0.8s 0.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(2) {
-    animation: fade-in 0.8s 0.2s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(3) {
-    animation: fade-in 0.8s 0.3s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(4) {
-    animation: fade-in 0.8s 0.4s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(5) {
-    animation: fade-in 0.8s 0.5s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(6) {
-    animation: fade-in 0.8s 0.6s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(7) {
-    animation: fade-in 0.8s 0.7s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(8) {
-    animation: fade-in 0.8s 0.8s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(9) {
-    animation: fade-in 0.8s 0.9s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(10) {
-    animation: fade-in 0.8s 1s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(11) {
-    animation: fade-in 0.8s 1.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(12) {
-    animation: fade-in 0.8s 1.2s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(13) {
-    animation: fade-in 0.8s 1.3s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(14) {
-    animation: fade-in 0.8s 1.4s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(15) {
-    animation: fade-in 0.8s 1.5s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(16) {
-    animation: fade-in 0.8s 1.6s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(17) {
-    animation: fade-in 0.8s 1.7s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  span:nth-child(18) {
-    animation: fade-in 0.8s 1.8s forwards cubic-bezier(0.11, 0, 0.5, 0);
-  }
-
-  @keyframes fade-in {
-    100% {
-      opacity: 1;
-      filter: blur(0);
-    }
-  }
-
-
-  .btn {
-    --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
-    --border-width: .125em;
-    --curve-size: .5em;
-    --blur: 30px;
-    --bg: #080312;
-    --color: #afffff;
-    color: var(--color);
-      /* use position: relative; so that BG is only for .btn */
-    position: relative;
-    isolation: isolate;
-    display: inline-grid;
-    text-align: center;
-    place-content: center;
-    padding: .5em 1.5em;
-    font-size: 17px;
-    border: 0;
-    text-transform: uppercase;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, .6);
-    clip-path: polygon(
-              /* Top-left */
-              0% var(--curve-size),
-
-              var(--curve-size) 0,
-              /* top-right */
-              100% 0,
-              100% calc(100% - var(--curve-size)),
-
-              /* bottom-right 1 */
-              calc(100% - var(--curve-size)) 100%,
-              /* bottom-right 2 */
-              0 100%);
-    transition: color 250ms;
-  }
-
-  .btn::after,
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  .btn::before {
-    background: var(--border-color);
-    background-size: 300% 300%;
-    animation: move-bg7234 5s ease infinite;
-    z-index: -2;
-  }
-
-  @keyframes move-bg7234 {
-    0% {
-      background-position: 31% 0%
-    }
-
-    50% {
-      background-position: 70% 100%
-    }
-
-    100% {
-      background-position: 31% 0%
-    }
-  }
-
-  .btn::after {
-    background: var(--bg);
-    z-index: -1;
-    clip-path: polygon(
-              /* Top-left */
-              var(--border-width) 
-              calc(var(--curve-size) + var(--border-width) * .5),
-
-              calc(var(--curve-size) + var(--border-width) * .5) var(--border-width),
-
-              /* top-right */
-              calc(100% - var(--border-width)) 
-              var(--border-width),
-
-              calc(100% - var(--border-width)) 
-              calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
-
-              /* bottom-right 1 */
-              calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) calc(100% - var(--border-width)),
-              /* bottom-right 2 */
-              var(--border-width) calc(100% - var(--border-width)));
-    transition: clip-path 500ms;
-  }
-
-  .btn:where(:hover, :focus)::after {
-    clip-path: polygon(
-                  /* Top-left */
-                  calc(100% - var(--border-width)) 
-
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-
-                  calc(100% - var(--border-width))
-
-                  var(--border-width),
-
-                  /* top-right */
-                  calc(100% - var(--border-width))
-
-                   var(--border-width),
-
-                  calc(100% - var(--border-width)) 
-
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
-
-                  /* bottom-right 1 */
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) 
-                  calc(100% - var(--border-width)),
-
-                  /* bottom-right 2 */
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-                  calc(100% - var(--border-width)));
-    transition: 200ms;
-  }
-
-  .btn:where(:hover, :focus) {
-    color: #fff;
-  }
-  .button {
-    width: 150px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0px 15px;
-    background-color: red;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    position: relative;
-    cursor: pointer;
-    font-weight: 900;
-    transition-duration: .2s;
-    background: linear-gradient(0deg, #000, #272727);
-    left: 70px;
-  }
-
-  .button:before, .button:after {
-    content: '';
-    position: absolute;
-    left: -2px;
-    top: -2px;
-    border-radius: 10px;
-    background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
-      #0000ff, #00ff00,#ffff00, #ff0000);
-    background-size: 400%;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    z-index: -1;
-    animation: steam 20s linear infinite;
-  }
-
-  @keyframes steam {
-    0% {
-      background-position: 0 0;
-    }
-
-    50% {
-      background-position: 400% 0;
-    }
-
-    100% {
-      background-position: 0 0;
-    }
-  }
-
-  .button:after {
-    filter: blur(50px);
-  }
-
-  footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #000;
-      text-align: center;
-      padding: 10px;
-      color: #333;
-      font-size: 14px;
-  }
-
-  </style>
-  </head>
-  <body>
-    <div id="main">
-      <br><br>
-      <h1 class="h">
-        <centre>
-        <span>Select <span>
-          <span>session <span>
-                <span>type <span>
-                </centre>
-      </span></span></span></span></span></span></h1>
-  <input hidden type="text" name="value" value="queen-izumi-md">
-        <br><br>
-        <button onclick="location.href='/qr'" class="button">Qr Code</button>
-        <br><br>
-      <button onclick="location.href='/pair'" class="button">Pair Code</button>
-        <br><br>
+      .shadow__btn:hover {
+        box-shadow: 0 0 5px rgb(255, 255, 255),
+              0 0 25px rgb(255, 255, 255),
+              0 0 50px rgb(255, 255,255),
+              0 0 100px rgb(255, 255, 255);
+        }
+        .dropdown {
+            display: none;
+            padding: 10px;
+            width: 400px;
+            border: 1px solid #ffffff;
+            background-color: #000000;
+            border-radius: 10px;
+            position: absolute;
+            top: 30px;
+            left: -180px;
+            z-index: 1;
+        }
+        .button-container {
+          opacity: 0;
+          animation: fadeIn 2s ease 1s forwards; /* Apply fade-in animation */
+        }
+        .seemore-container {
+            opacity: 0;
+            font-family: 'Montserrat',sans-serif;
+            font-size: small;
+            position:relative;
+            top: 10rem;
+            cursor: help;
+            animation: fadeInV2 2s ease 4s forwards; /* Apply fade-in animation */
+          }
+        .show-dropdown {
+            display: block;
+        }
+       @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+       @keyframes fadeInV2 {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 0.3;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 class="large-title">NEZUKO</h1>
+    <h2 style="font-family: 'thunder',sans-serif; font-weight: 200; opacity: 0; animation: fadeIn 2s ease 0.5s forwards;">How do you want to pair?</h2>
+    <div class="button-container">
+        <button type="button" onclick="window.location ='/qr'" class="shadow__btn">Via Qr</button>
+        <button type="button" onclick="window.location ='/pair'" class="shadow__btn">Via Pair</button>
       </form>
-      <button onclick="location.href='/update-session'" class="button">Update Session</button>
-    </div>
-    <footer>
-       <p>© 2024 GODZENITSU. All rights reserved</p>
-    </footer>
-  </body>
-  </html>
-
- 
+        </div>
+        <div class="seemore-container">
+          <span id="seeMoreButton" class="info-icon"><u>IMPORTANT NOTE</u></span>
+          <script>
+              const seeMoreButton = document.getElementById('seeMoreButton');
+              seeMoreButton.addEventListener('click', function (event) {
+                alert('If Not Working Pair Code, Use Qr Code  With Using a Vpn!!')
+              });
+             </script>
+          </div>
+</body>
+</html>
