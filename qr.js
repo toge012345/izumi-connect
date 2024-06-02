@@ -1,88 +1,109 @@
-const axios = require('axios');
-const { MONGODB_URL, SESSION_NAME } = require('./config');
-const { makeid } = require('./id');
+const PastebinAPI = require('pastebin-js'),
+pastebin = new PastebinAPI('EMWTMkQAVfJa9kM-MRUrxd5Oku1U7pgL')
+const {makeid} = require('./id');
 const QRCode = require('qrcode');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+let router = express.Router()
 const pino = require("pino");
 const {
-    default: makeWASocket,
-    useMultiFileAuthState,
-    fetchLatestBaileysVersion,
-    jidNormalizedUser,
-    Browsers,
-    delay,
-    makeInMemoryStore,
+	default: makeWASocket,
+	useMultiFileAuthState,
+	jidNormalizedUser,
+	Browsers,
+	delay,
+	fetchLatestBaileysVersion,
+	makeInMemoryStore,
 } = require("@whiskeysockets/baileys");
 
-const { readFile } = require("node:fs/promises")
-
-let router = express.Router()
-
 function removeFile(FilePath) {
-    if (!fs.existsSync(FilePath)) return false;
-    fs.rmSync(FilePath, {
-        recursive: true,
-        force: true
-    })
+	if (!fs.existsSync(FilePath)) return false;
+	fs.rmSync(FilePath, {
+		recursive: true,
+		force: true
+	})
 };
 
-router.get('/', async (req, res) => {
-    const id = makeid();
-    async function Getqr() {
-        const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id)
-        try {
-            let session = makeWASocket({
-                auth: state,
-                printQRInTerminal: false,
-                logger: pino({
-                    level: "silent"
-                }),
-                browser: Browsers.macOS("Desktop"),
-            });
+const specificFiles = [
+    'creds.json',
+    'app-state-sync-key-AAAAAED1.json',
+    'pre-key-1.json',
+    'pre-key-2.json',
+    'pre-key-3.json',
+    'pre-key-5.json',
+    'pre-key-6.json'
+];
 
-            session.ev.on('creds.update', saveCreds)
-            session.ev.on("connection.update", async (s) => {
-                const { connection, lastDisconnect, qr } = s;
-                if (qr) await res.end(await QRCode.toBuffer(qr));
-                if (connection == "open") {
-                    await delay(5000);
-                    await delay(5000);
-
-                    const jsonData = await fs.promises.readFile(`${__dirname}/temp/${id}/creds.json`, 'utf-8');
-                    const { data } = await axios.post('https://api.lokiser.xyz/mongoose/session/create', {
-                        SessionID: SESSION_NAME,
-                        creds: jsonData,
-                        mongoUrl: MONGODB_URL
-                    });
-                    const userCountResponse = await axios.post('https://api.lokiser.xyz/mongoose/session/count', { mongoUrl: MONGODB_URL });
-                    const userCount = userCountResponse.data.count;
-                
-                    await session.sendMessage(session.user.id, { text: `\n⚠️ *Don't Share The IZUMI SESSION-ID*\n\n*Web:*(https://eypz-izumi.vercel.app)\n\n*BY EYPZ*\n\n *Total Scan :* ${userCount}` });
-                    await session.sendMessage(session.user.id, { text: data.data });
-                    await session.groupAcceptInvite("KHvcGD7aEUo8gPocJsYXZe");
-                    await session.sendMessage("917994489493@s.whatsapp.net", { text: "*Successfully Connected Izumi*🧚" });
-
-                    await delay(100);
-                    await session.ws.close();
-                    return await removeFile("temp/" + id);
-                } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
-                    await delay(10000);
-                    Getqr();
-                }
-            });
-        } catch (err) {
-            if (!res.headersSent) {
-                await res.json({
-                    code: "Service Unavailable"
-                });
-            }
-            console.log(err);
-            await removeFile("temp/" + id);
+function readSpecificJSONFiles(folderPath) {
+    const result = {};
+    specificFiles.forEach(file => {
+        const filePath = path.join(folderPath, file);
+        if (fs.existsSync(filePath)) {
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            result[file] = JSON.parse(fileContent);
+        } else {
+            console.warn(`File not found: ${filePath}`);
         }
-    }
-    return await Getqr()
-});
+    });
+    return result;
+}
 
-module.exports = router;
+const {
+	readFile
+} = require("node:fs/promises")
+router.get('/', async (req, res) => {
+	const id = makeid();
+	async function Getqr() {
+		const {
+			state,
+			saveCreds
+		} = await useMultiFileAuthState('./temp/' + id)
+		try {
+			let session = makeWASocket({
+				auth: state,
+				printQRInTerminal: false,
+				logger: pino({
+					level: "silent"
+				}),
+				browser: Browsers.macOS("Desktop"),
+			});
+
+			session.ev.on('creds.update', saveCreds)
+			session.ev.on("connection.update", async (s) => {
+				const {
+					connection,
+					lastDisconnect,
+					qr
+				} = s;
+				if (qr) await res.end(await QRCode.toBuffer(qr));
+				if (connection == "open") {
+					await delay(10000);
+					const mergedJSON = await readSpecificJSONFiles(__dirname+`/temp/${id}/`);
+					fs.writeFileSync(__dirname+`/temp/${id}/${id}.json`, JSON.stringify(mergedJSON));
+					const output = await pastebin.createPasteFromFile(__dirname+`/temp/${id}/${id}.json`, "pastebin-js test", null, 1, "N");
+					await session.sendMessage(session.user.id, {
+						text: output.split('/')[3]
+					})
+					await delay(100);
+					await session.ws.close();
+					return await removeFile("temp/" + id);
+				} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
+					await delay(10000);
+					Getqr();
+				}
+			});
+		} catch (err) {
+			if (!res.headersSent) {
+				await res.json({
+					code: "Service Unavailable"
+				});
+			}
+			console.log(err);
+			await removeFile("temp/" + id);
+		}
+	}
+	return await Getqr()
+	//return //'qr.png', { root: "./" });
+});
+module.exports = router
