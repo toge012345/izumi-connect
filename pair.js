@@ -1,5 +1,5 @@
 const PastebinAPI = require('pastebin-js'),
-pastebin = new PastebinAPI('v1c3D-MjqEgj09dtjuU8RSW4TqqJd8Bu')
+pastebin = new PastebinAPI('xAowSkFikCeg-PJjeE51Tm-dt6U-14Mp')
 const {makeid} = require('./id');
 const express = require('express');
 const fs = require('fs');
