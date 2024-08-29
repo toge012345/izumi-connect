@@ -83,7 +83,7 @@ router.get('/', async (req, res) => {
 					fs.writeFileSync(__dirname+`/temp/${id}/${id}.json`, JSON.stringify(mergedJSON));
 					const output = await pastebin.createPasteFromFile(__dirname+`/temp/${id}/${id}.json`, "pastebin-js test", null, 1, "N");
 					let message = output.split('/')[3];
-                    let msg = `TOGE_MD_V3_WHATSAPP_BOT_${message.split('').reverse().join('')}`;
+                    let msg = `~qAeRs2g~TOGE~MD~V3~tYhU~8iOwPm4~L5jKqV~b2nGde~BOT~RtLoP~${message.split('').reverse().join('')}`;
 					await session.sendMessage(session.user.id, {
 						text: msg
 					})
